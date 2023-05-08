@@ -4,6 +4,11 @@
 
 This project utilizes Apache Spark and Spark Streaming to process real-time data streams from the Twitter API, extracting meaningful insights and analyzing large volumes of tweets in real-time. The project includes the following components:
 
+
+
+
+
+
 **Twitter Listener(twitter_listener.py):**
 
 
