@@ -13,7 +13,8 @@ The report provides an overview of the project's architecture, design, and imple
 
 
 Code details:
-1- Twitter Listener: twitter_listener.py
+**Twitter Listener: twitter_listener.py
+
  Modifications on code:
 - Script extract data every 5 minutes
 - Start and End data are (day-1 with period 5 minutes between start and end)
@@ -22,7 +23,7 @@ Code details:
  Source : twitter API
  Target : socket stream to spark streaming.
 
-2- Spark streaming script: spark_streaming.py
+**Spark streaming script: spark_streaming.py
 
  Code specs:
 - User defined schema that applied on the received JSON file
@@ -32,8 +33,9 @@ Code details:
  Source : socket stream from listener
  Target : HDFS: /twitter-landing-data.
 
-3- Hive dimensions Script: hive_script.sql
- Code specs:
+**Hive dimensions Script: hive_script.sql
+
+Code specs:
 
 - Create statement for three tables (twitter_landing_table , users_raw , tweets_raw)
 - Slowly Changing Dimension in Users_raw Table
@@ -49,7 +51,8 @@ the users_raw table is replaced with the data from the merge table.
  Target : 2 Tables (tweets_raw , users_raw) located at HDFS: /twitter-raw-data
 
 
-4- SparkSQL Fact Table Script: fact_processing.py
+**SparkSQL Fact Table Script: fact_processing.py
+
  Code specs:
 - Extracting data from dims using SparkSQL with hive metastore
 - New attribute (Trust_Ratio_Perc) has been generated on the fly using some SQL
