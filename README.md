@@ -20,17 +20,21 @@ Code details:
 - Data is being sent to spark streaming as a JSON file for every batch.
 - Script is running all time the machine is running
  Source : twitter API
- Target : socket stream to spark streaming
+ Target : socket stream to spark streaming.
+
 2- Spark streaming script: spark_streaming.py
+
  Code specs:
 - User defined schema that applied on the received JSON file
 - Data received is being written on HDFS as Parquet file with partitioned by (year , month
 , day , hour)
 - Script is running all time the machine is running
  Source : socket stream from listener
- Target : HDFS: /twitter-landing-data
+ Target : HDFS: /twitter-landing-data.
+
 3- Hive dimensions Script: hive_script.sql
  Code specs:
+
 - Create statement for three tables (twitter_landing_table , users_raw , tweets_raw)
 - Slowly Changing Dimension in Users_raw Table
 - To achieve a Slowly Changing Dimension (SCD) in the users_raw table, a work-around
