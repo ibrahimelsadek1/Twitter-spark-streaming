@@ -1,64 +1,27 @@
-# Twitter-spark-streaming
 
-Apache Spark is a popular open-source big data processing framework that provides high-performance,
-scalable, and fault-tolerant processing of large data sets. Spark Streaming is a real-time processing
-extension to Spark that enables the processing of live data streams. These technologies have become
-the backbone of many modern big data applications, including real-time analytics, machine learning, and
-data processing.
-In this report, we present a project that utilizes Spark and Spark Streaming to process data from the
-Twitter API. The goal of this project is to extract meaningful insights and analyze real-time data streams
-from Twitter. The project uses Spark's distributed processing capabilities and Spark Streaming's realtime processing capabilities to analyze large volumes of tweets in real-time.
-The report provides an overview of the project's architecture, design, and implementation details.
+# Twitter Spark Streaming Project
 
+The Twitter Spark Streaming Project is a big data processing application that utilizes Apache Spark and Spark Streaming to extract meaningful insights and analyze real-time data streams from Twitter. The project is designed to process large volumes of tweets in real-time and analyze them for various purposes such as sentiment analysis, trend analysis, and user behavior analysis.
 
+This project is intended for data engineers, data scientists, and developers who are interested in learning how to use Apache Spark and Spark Streaming to process real-time data streams from Twitter.
 
-Code details:
-**Twitter Listener: twitter_listener.py
+Architecture and Design
 
- Modifications on code:
-- Script extract data every 5 minutes
-- Start and End data are (day-1 with period 5 minutes between start and end)
-- Data is being sent to spark streaming as a JSON file for every batch.
-- Script is running all time the machine is running
- Source : twitter API
- Target : socket stream to spark streaming.
+The project consists of four main components: the Twitter listener, the Spark Streaming script, the Hive dimensions script, and the SparkSQL fact table script. The Twitter listener extracts data from the Twitter API every 5 minutes and sends it to the Spark Streaming script as a JSON file for every batch. The Spark Streaming script applies a user-defined schema to the received JSON file and writes the data to HDFS as a Parquet file partitioned by year, month, day, and hour. The Hive dimensions script creates three tables and implements a Slowly Changing Dimension in the users_raw table. Finally, the SparkSQL fact table script extracts data from the dimensions tables using SparkSQL with a hive metastore and generates a new attribute on the fly using SQL. Hashtags are also extracted to make them as dim on the fly and to know popular hashtags.
 
-**Spark streaming script: spark_streaming.py
+Usage
 
- Code specs:
-- User defined schema that applied on the received JSON file
-- Data received is being written on HDFS as Parquet file with partitioned by (year , month
-, day , hour)
-- Script is running all time the machine is running
- Source : socket stream from listener
- Target : HDFS: /twitter-landing-data.
+To use the Twitter Spark Streaming Project, you will need to have access to the Twitter API and have a Spark cluster set up. You will also need to modify the code to suit your specific use case.
 
-**Hive dimensions Script: hive_script.sql
+To start using the project, you can follow the steps below:
 
-Code specs:
+Clone the repository to your local machine.
+Modify the twitter_listener.py script to extract data every 5 minutes and start and end data are (day-1 with period 5 minutes between start and end).
+Modify the spark_streaming.py script to apply a user-defined schema and write the data to HDFS as a Parquet file partitioned by year, month, day, and hour.
+Modify the hive_script.sql script to create three tables and implement a Slowly Changing Dimension in the users_raw table.
+Modify the fact_processing.py script to extract data from the dimensions tables using SparkSQL with a hive metastore and generate a new attribute on the fly using SQL.
+Once you have made the necessary modifications to the code, you can run the scripts on your Spark cluster to start processing real-time data streams from Twitter.
 
-- Create statement for three tables (twitter_landing_table , users_raw , tweets_raw)
-- Slowly Changing Dimension in Users_raw Table
-- To achieve a Slowly Changing Dimension (SCD) in the users_raw table, a work-around
-approach was adopted. The concept involves creating a temporary table to hold the data
-from the already existing users_raw table and new users from the twitter_landing_table
-who are not in users_raw.
-- The temporary table serves as a merge table where the new data is added and the existing
-data is updated based on the user_id column. Once the merge table is updated, all data in
-the users_raw table is replaced with the data from the merge table.
- Source for twitter_landing_table : HDFS: /twitter-landing-data
- Source for dimensions : table(twitter_landing_table)
- Target : 2 Tables (tweets_raw , users_raw) located at HDFS: /twitter-raw-data
+Conclusion
 
-
-**SparkSQL Fact Table Script: fact_processing.py
-
- Code specs:
-- Extracting data from dims using SparkSQL with hive metastore
-- New attribute (Trust_Ratio_Perc) has been generated on the fly using some SQL
-- Hashtags was extracted alone with tweet_id to make it as dim on the fly to know
-popular hashtags
-- Hashtags like: layoff, #layoffs #job #loss has been excluded from results because it refers
-to the keyword that we already searched for.
- Source: dimensions Tables (tweets_raw , users_raw)
- Target : Tables (twitter_fact_processed) located at HDFS: /twitter-processed-data
+The Twitter Spark Streaming Project is a powerful big data processing application that can be used for a wide range of purposes such as sentiment analysis, trend analysis, and user behavior analysis. By utilizing Apache Spark and Spark Streaming, this project can process large volumes of tweets in real-time and extract meaningful insights from them.
