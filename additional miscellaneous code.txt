@@ -1,0 +1,23 @@
+/// -- listener task
+
+python3 twitter_listener.pu
+
+----------------------------------------------
+
+/// -- Sreaming job submit
+
+nohup spark-submit --master yarn --deploy-mode cluster --conf spark.pyspark.python=/usr/bin/python3 spark_streaming.py > spark.out &
+
+----------------------------------------------
+
+/// -- directories paths
+
+/twitter-landing-data
+/twitter-raw-data 
+/twitter-processed-data
+
+----------------------------------------------
+
+/// - crontab -e 
+
+*/15 * * * * /home/itversity/hive_job.sh && sleep 30 && /home/itversity/fact_job_submit.sh 
