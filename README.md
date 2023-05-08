@@ -23,17 +23,17 @@ A Python script that extracts data from the dimensions tables using SparkSQL wit
 
 # Requirements
 
-Apache Spark 2.4+
-Hadoop 2.7+
-Python 3.6+
-PySpark 2.4+ (for Spark Streaming)
-Hive 2.3+ (for Hive Metastore)
+- Apache Spark 2.4+
+- Hadoop 2.7+
+- Python 3.6+
+- PySpark 2.4+ (for Spark Streaming)
+- Hive 2.3+ (for Hive Metastore)
 
 # Usage
 
-*Clone the repository to your local machine.
-*Modify the twitter_listener.py script with your Twitter API credentials and run it to start extracting data from the Twitter API.
-*Modify the spark_streaming.py script with your HDFS path and run it to start processing the data streams.
-*Modify the hive_script.sql script with your database and table names and run it to create the required tables and implement the SCD.
-*Modify the fact_processing.py script with your HDFS paths and run it to generate the processed data table.
+- Clone the repository to your local machine.
+- Modify the twitter_listener.py script with your Twitter API credentials and run it to start extracting data from the Twitter API.
+- Modify the spark_streaming.py script with your HDFS path and run it to start processing the data streams.
+- Modify the hive_script.sql script with your database and table names and run it to create the required tables and implement the SCD.
+- Modify the fact_processing.py script with your HDFS paths and run it to generate the processed data table.
 
