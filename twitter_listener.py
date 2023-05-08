@@ -25,7 +25,7 @@ import time
 #To open up a port to forward tweets
 import socket 
 
-os.environ['TOKEN'] =  "AAAAAAAAAAAAAAAAAAAAAIdCcgEAAAAADxqlmxSiZLO05fKmfbrX7G3ckqQ%3DCCPSGoWTDF6uu4qdFsncsuOat5GFTTFv5blXPdA4ueK4YLu3gg"
+os.environ['TOKEN'] =  ""
 
 def auth():
     return os.getenv('TOKEN')
