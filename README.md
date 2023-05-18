@@ -26,7 +26,7 @@ A SQL script that creates three tables (twitter_landing_table, users_raw, tweets
 
 A Python script that extracts data from the dimensions tables using SparkSQL with Hive Metastore, generates a new attribute (Trust_Ratio_Perc) on the fly using SQL, extracts popular hashtags as a dimension, and writes the processed data as a table on HDFS.
 
-# Requirements
+# Stack
 
 - Apache Spark 2.4+
 - Hadoop 2.7+
@@ -34,11 +34,4 @@ A Python script that extracts data from the dimensions tables using SparkSQL wit
 - PySpark 2.4+ (for Spark Streaming)
 - Hive 2.3+ (for Hive Metastore)
 
-# Usage
-
-- Clone the repository to your local machine.
-- Modify the twitter_listener.py script with your Twitter API credentials and run it to start extracting data from the Twitter API.
-- Modify the spark_streaming.py script with your HDFS path and run it to start processing the data streams.
-- Modify the hive_script.sql script with your database and table names and run it to create the required tables and implement the SCD.
-- Modify the fact_processing.py script with your HDFS paths and run it to generate the processed data table.
 
